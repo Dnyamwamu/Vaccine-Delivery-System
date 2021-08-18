@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dnyamwamu:Raphaelsite1991@vaccine-delivery-system.qasv0.mongodb.net/vaccinedeliverysystem?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}
