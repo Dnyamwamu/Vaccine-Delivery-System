@@ -44,7 +44,36 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      rate: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  animalRegistration: [
+    {
+      regNumber: {
+        type: String,
+        required: true,
+      },
+      breed: {
+        type: String,
+        required: true,
+      },
+      sex: {
+        type: String,
+        required: true,
+      },
+      dob: {
+        type: Date,
+        required: true,
+        default: Date.now,
+      },
+      idNo: {
+        type: Number,
+        required: true,
+      },
     },
   ],
 })
-module.exports = Profile = mongoose.model('profile', ProfileSchema)
+module.exports = mongoose.model('profile', ProfileSchema)

@@ -2,38 +2,40 @@ import React, { Fragment, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { registerAnimal } from '../../actions/profile'
+import { vaccination } from '../../actions/profile'
+import { Link } from 'react-router-dom'
 
-const RegisterAnimal = ({ registerAnimal, history }) => {
+const Vaccination = ({ vaccination, history }) => {
   const [formData, setFormData] = useState({
-    regNumber: '',
-    breed: '',
-    idNo: '',
-    sex: '',
-    dob: '',
+    vaccineName: '',
+    doses: '',
+    manufacturer: '',
+    date: '',
+    rate: '',
   })
-  const { regNumber, breed, idNo, sex, dob } = formData
+  const { vaccineName, doses, manufacturer, date, rate } = formData
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
   return (
     <Fragment>
-      <h1 class='large text-primary'>Animal Registration</h1>
-      <p class='lead'>
-        <i class='fas fa-code-branch'></i> Add the animal Details{' '}
+      <h1 className='large text-primary'>Add Vaccination Details</h1>
+      <p className='lead'>
+        <i className='fas fa-code-branch'></i> Add the vaccination Details
+        administered to your animal{' '}
       </p>
       <small>* = required field</small>
       <form
-        class='form'
+        className='form'
         onSubmit={(e) => {
           e.preventDefault()
-          registerAnimal(formData, history)
+          vaccination(formData, history)
         }}
       >
         <div className='form-group'>
           <select
-            name='registrationNumber'
-            value={regNumber}
+            name='vaccineName'
+            value={vaccineName}
             onChange={(e) => onChange(e)}
           >
             <option value='0'>* Select Vaccine Name</option>
@@ -45,7 +47,7 @@ const RegisterAnimal = ({ registerAnimal, history }) => {
           <small className='form-text'>Choose the Vaccine Name</small>
         </div>
         <div className='form-group'>
-          <select name='noDoses' value={noDoses} onChange={(e) => onChange(e)}>
+          <select name='doses' value={doses} onChange={(e) => onChange(e)}>
             <option value='0'>* Number of Doses</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -56,8 +58,8 @@ const RegisterAnimal = ({ registerAnimal, history }) => {
         </div>
         <div className='form-group'>
           <select
-            name='vaccineManufacturer'
-            value={vaccineManufacturer}
+            name='manufacturer'
+            value={manufacturer}
             onChange={(e) => onChange(e)}
           >
             <option value='0'>* Select the Vaccine Manufacturer</option>
@@ -71,21 +73,17 @@ const RegisterAnimal = ({ registerAnimal, history }) => {
           </small>
         </div>
 
-        <div class='form-group'>
+        <div className='form-group'>
           <h4>Date of Vaccination</h4>
           <input
             type='date'
-            name='vaccinationDate'
-            value={vaccinationDate}
+            name='date'
+            value={date}
             onChange={(e) => onChange(e)}
           />
         </div>
         <div className='form-group'>
-          <select
-            name='rateVaccine'
-            value={rateVaccine}
-            onChange={(e) => onChange(e)}
-          >
+          <select name='rate' value={rate} onChange={(e) => onChange(e)}>
             <option value='0'>* Rate the Vaccine </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -96,17 +94,17 @@ const RegisterAnimal = ({ registerAnimal, history }) => {
           <small className='form-text'>Rate the Vaccine effectiveness</small>
         </div>
 
-        <input type='submit' class='btn btn-primary my-1' />
-        <a class='btn btn-light my-1' href='dashboard.html'>
+        <input type='submit' className='btn btn-primary my-1' />
+        <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
-        </a>
+        </Link>
       </form>
     </Fragment>
   )
 }
 
-RegisterAnimal.propTypes = {
-  registerAnimal: PropTypes.func.isRequired,
+Vaccination.propTypes = {
+  vaccination: PropTypes.func.isRequired,
 }
 
-export default connect(null, { registerAnimal })(withRouter(RegisterAnimal))
+export default connect(null, { vaccination })(withRouter(Vaccination))

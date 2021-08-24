@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Moment from 'react-moment'
+import formatDate from '../../utils/formatDate'
 import { deleteComment } from '../../actions/post'
 
 const CommentItem = ({
@@ -20,10 +20,8 @@ const CommentItem = ({
         </Link>
       </div>
       <div>
-        <p class='my-1'>{text}</p>
-        <p class='post-date'>
-          Posted on <Moment format='YYY/MM/DD'>{date}</Moment>
-        </p>
+        <p className='my-1'>{text}</p>
+        <p className='post-date'>Posted on {formatDate(date)}</p>
         {!auth.loading && user === auth.user._id && (
           <button
             onClick={(e) => deleteComment(postId, _id)}
@@ -39,7 +37,7 @@ const CommentItem = ({
 }
 
 CommentItem.propTypes = {
-  postId: PropTypes.number.isRequired,
+  postId: PropTypes.string.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteComment: PropTypes.func.isRequired,

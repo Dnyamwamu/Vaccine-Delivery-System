@@ -6,6 +6,8 @@ import Spinner from '../layout/Spinner'
 import { getProfileById } from '../../actions/profile'
 import ProfileTop from './ProfileTop'
 import ProfileAbout from './ProfileAbout'
+import ProfileVaccination from './ProfileVaccination'
+import ProfileAnimalRegistration from './ProfileAnimalRegistration'
 
 const Profile = ({
   match,
@@ -15,7 +17,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfileById(match.params.id)
-  }, [getProfileById])
+  }, [getProfileById, match.params.id])
 
   return (
     <Fragment>
@@ -33,9 +35,40 @@ const Profile = ({
                 Edit Profile
               </Link>
             )}
-          <div class='profile-grid my-1'>
+          <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
+            <div className='profile-exp bg-white p-2'>
+              <h2 className='text-primary'>Vaccination</h2>
+              {profile.vaccination.length > 0 ? (
+                <Fragment>
+                  {profile.vaccination.map((vaccination) => (
+                    <ProfileVaccination
+                      key={vaccination._id}
+                      vaccination={vaccination}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No Vaccination performed</h4>
+              )}
+            </div>
+
+            <div className='profile-edu bg-white p-2'>
+              <h2 className='text-primary'>Animal Registration</h2>
+              {profile.animalRegistration.length > 0 ? (
+                <Fragment>
+                  {profile.animalRegistration.map((animalRegistration) => (
+                    <ProfileAnimalRegistration
+                      key={animalRegistration._id}
+                      animalRegistration={animalRegistration}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No Animal Registered</h4>
+              )}
+            </div>
           </div>
         </Fragment>
       )}

@@ -185,7 +185,7 @@ img {
 .badge-danger,
 .alert-danger {
   background: var(--danger-color);
-  color: rgb(243, 54, 54);
+  color: #fff;
 }
 
 .btn-success,

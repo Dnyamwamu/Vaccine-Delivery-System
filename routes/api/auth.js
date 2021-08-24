@@ -1,18 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const auth = require('../../middleware/auth')
-const User = require('../../models/User')
-const { check, validationResult } = require('express-validator')
-const config = require('config')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const auth = require('../../middleware/auth')
+const jwt = require('jsonwebtoken')
+const config = require('config')
+const { check, validationResult } = require('express-validator')
+
+const User = require('../../models/User')
 
 // @route GET api/auth
-// @desc  Test route
-// @access Public
+// @desc  Get User by token
+// @access Private
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('password')
+    const user = await User.findById(req.user.id).select('-password')
     res.json(user)
   } catch (err) {
     console.error(err.message)
@@ -21,7 +22,7 @@ router.get('/', auth, async (req, res) => {
 })
 
 // @route POST api/auth
-// @desc  Authinticate User and get Token
+// @desc  Authenticate User and get Token
 // @access Public
 router.post(
   '/',
@@ -29,9 +30,10 @@ router.post(
     check(
       'phoneNumber',
       'Please include a valid Number with this format (07.....)'
-    ),
+    ).exists(),
     check('password', 'Password is required').exists(),
   ],
+
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -50,7 +52,7 @@ router.post(
           .json({ errors: [{ msg: 'Invalid Credentials' }] })
       }
 
-      //match Email and password
+      //match PhoneNumber and password
       const isMatch = await bcrypt.compare(password, user.password)
       if (!isMatch) {
         return res

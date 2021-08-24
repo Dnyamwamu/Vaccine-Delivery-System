@@ -14,7 +14,7 @@ const Login = ({ login, isAuthenticated }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
     login(phoneNumber, password)
   }
@@ -52,7 +52,7 @@ const Login = ({ login, isAuthenticated }) => {
           />
         </div>
 
-        <input type='submit' className='btn btn-primary' value='Login' />
+        <input type='submit' className='btn btn-primary' value='login' />
       </form>
       <p className='my-1'>
         Don't have an account? <Link to='/register'>Sign Up</Link>

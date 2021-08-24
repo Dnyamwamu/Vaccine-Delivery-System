@@ -1,20 +1,27 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Moment from 'react-moment'
+import formatDate from '../../utils/formatDate'
+import { deleteAnimalRegistration } from '../../actions/profile'
 
-const AnimalRegistration = ({ animalRegistration }) => {
+const AnimalRegistration = ({
+  animalRegistration,
+  deleteAnimalRegistration,
+}) => {
   const animalRegistrations = animalRegistration.map((reg) => (
     <tr key={reg._id}>
       <td>{reg.regNumber}</td>
       <td>{reg.breed}</td>
       <td>{reg.sex}</td>
-      <td>
-        <Moment format='YYYY/MM/DD'>{reg.dob}</Moment>
-      </td>
+      <td>{formatDate(reg.dob)}</td>
       <td>{reg.idNo}</td>
       <td>
-        <button className='btn btn-danger'>Delete</button>
+        <button
+          onClick={() => deleteAnimalRegistration(reg._id)}
+          className='btn btn-danger'
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ))
@@ -40,6 +47,7 @@ const AnimalRegistration = ({ animalRegistration }) => {
 
 AnimalRegistration.propTypes = {
   animalRegistration: PropTypes.array.isRequired,
+  deleteAnimalRegistration: PropTypes.func.isRequired,
 }
 
-export default connect()(AnimalRegistration)
+export default connect(null, { deleteAnimalRegistration })(AnimalRegistration)

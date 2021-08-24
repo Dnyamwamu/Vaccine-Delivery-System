@@ -1,14 +1,14 @@
-import React, { Fragment, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const ProfileItem = ({
   profile: {
     user: { _id, name, avatar },
-    status,
     county,
     subCounty,
     ward,
+    location,
   },
 }) => {
   return (
@@ -16,10 +16,10 @@ const ProfileItem = ({
       <img src={avatar} alt='' className='round-img' />
       <div>
         <h2>{name}</h2>
-        <p>
-          {status} {county && <span>at {county}</span>}
-        </p>
+        <p>{county && <span>at {county}</span>}</p>
         <p className='my-1'>{subCounty && <span>{subCounty}</span>}</p>
+        <p className='my-1'>{ward && <span>{ward}</span>}</p>
+        <p className='my-1'>{location && <span>{location}</span>}</p>
         <Link to={`/profile/${_id}`} className='btn btn-primary'>
           View Profile
         </Link>
@@ -28,6 +28,8 @@ const ProfileItem = ({
   )
 }
 
-ProfileItem.propTypes = {}
+ProfileItem.propTypes = {
+  profile: PropTypes.object.isRequired,
+}
 
 export default ProfileItem

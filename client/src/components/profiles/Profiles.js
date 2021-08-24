@@ -15,10 +15,9 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className='large text-primary'>Farmers</h1>
+          <h1 className='large text-primary'>Vaccines</h1>
           <p className='lead'>
-            <i className='fab fa-connectdevelop'></i>Browse and connect with
-            Farmers
+            <i className='fab fa-connectdevelop'></i>Browse for legit Vaccines
           </p>
           <div className='profiles'>
             {profiles.length > 0 ? (
