@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Vaccines Delivery System for farmers",
   "main": "server.js",
+  "engines": {
+    "node": "14.17.5"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

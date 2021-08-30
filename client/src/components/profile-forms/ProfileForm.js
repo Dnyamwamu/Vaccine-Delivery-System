@@ -80,7 +80,7 @@ const ProfileForm = ({
         </div>
         <div className='form-group'>
           <select
-            name='sub-county'
+            name='subCounty'
             value={subCounty}
             onChange={(e) => onChange(e)}
           >
